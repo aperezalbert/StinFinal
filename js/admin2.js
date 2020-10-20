@@ -1,8 +1,8 @@
    const todoList = document.getElementById('table');
    const form = document.getElementById('form');
    const editFormContainer = document.getElementById(`editFormContainer`)
+   const deleFormContainer = document.getElementById(`deleFormContainer`)
    
- 
 
     form.addEventListener('submit', e => {
       e.preventDefault();
@@ -50,7 +50,7 @@
         <img src="${game.imgSource}" class="card-img" alt="...">
         </td>
         <td class="">
-        <button id= ${game.id} type="button" class="btn btndelete deleteButton text-white"><span class="fas fa-trash-alt"></span>Borrar</button>
+        <button  type="button" class="btn btndelete deleteButton text-white" data-toggle="modal" data-target="#modalFormDelete"><span class="fas fa-trash-alt"></span>Borrar</button>
         </td>
         <td class="">
         <button id= ${game.id} type="button" class="btn  btnedit editButton text-white" data-toggle="modal" data-target="#modalForm"><span class="fas fa-edit"></span>Editar</button>
@@ -80,23 +80,60 @@
       debugger
     }
     
+    getTodos().then(Games => buildTodo(Games));
+
     async function deleteVideoGame (id) {
       const newURL = `http://localhost:3000/Games/${id}`;
       const response = await fetch(newURL, {
         method: 'DELETE'
       })
     }
-
-
-    getTodos().then(Games => buildTodo(Games));
     
+     
+     
     todoList.addEventListener(`click`, e => {
       if(e.target.classList.contains(`deleteButton`)) {
         const id = e.target.id;
-        
+        getgamesbyId(id).then(game => deleteForm(game))
+      }
+    })
+
+    function deleteForm() {
+      const form = document.createElement('form');
+      form.id = 'deleForm'
+      form.classList.add('deletForm')
+      form.innerHTML = `
+      <div class="modal fade" id="modalFormDelete" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel1">Borrar Juego</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body commontexts">
+          <h4 id:"modaltextodelete"> ¿Esta Seguro de eliminar este juego?</h5>
+          </div>
+         <div class="modal-footer">
+         <button  class="btn btn-success aceptar putContent" >Si</button>
+         <button  type="button" class="btn btn-success putContent" data-dismiss="modal">No</button>
+         </div>
+        </div>
+      </div>
+    </div>
+      `
+      deleFormContainer.appendChild(form);
+    }
+
+
+    
+    deleFormContainer.addEventListener(`click`, e => {
+      if(e.target.classList.contains(`aceptar`)) {
         deleteVideoGame(id);
       }
     })
+    
     
     todoList.addEventListener(`click`,e => {
       if(e.target.classList.contains(`editButton`)) {
@@ -111,6 +148,9 @@
       const data = await response.json();
       return data;
     }
+
+   
+
 
     function createForm(values) {
       const form = document.createElement('form');

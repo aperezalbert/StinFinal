@@ -1,51 +1,6 @@
 {
   "Games": [
     {
-      "id": 1,
-      "name": "Outlast",
-      "category": "Terror",
-      "style": "singleplayer",
-      "publicado": false,
-      "imgSource": "/img/T1.jpg",
-      "destacado": "si"
-    },
-    {
-      "id": 2,
-      "name": "Final Fantasy",
-      "style": "multiplayer",
-      "category": "Fantasy",
-      "imgSource": "/img/F1.jpg",
-      "publicado": true,
-      "destacado": "si"
-    },
-    {
-      "id": 3,
-      "name": "Call of Duty",
-      "style": "singleplayer",
-      "category": "Shooter",
-      "imgSource": "/img/S1.jpg",
-      "publicado": true,
-      "destacado": "si"
-    },
-    {
-      "id": 4,
-      "name": "Counter Strike",
-      "style": "multiplayer",
-      "category": "Accion",
-      "imgSource": "/img/A1.jpg",
-      "publicado": true,
-      "destacado": "si"
-    },
-    {
-      "id": 5,
-      "name": "Silent Hill",
-      "style": "singleplayer",
-      "category": "Terror",
-      "imgSource": "/img/T2.jpg",
-      "publicado": true,
-      "destacado": "si"
-    },
-    {
       "id": 6,
       "name": "The witcher",
       "style": "multiplayer",
@@ -70,7 +25,7 @@
       "category": "Accion",
       "imgSource": "/img/A2.jpg",
       "publicado": true,
-      "destacado": "no"
+      "destacado": "si"
     },
     {
       "id": 9,
@@ -276,15 +231,6 @@
       "style": "singleplayer",
       "category": "Shooter",
       "imgSource": "/img/S8.jpg",
-      "publicado": true,
-      "destacado": "no"
-    },
-    {
-      "id": 32,
-      "name": "Bloodborne",
-      "style": "multiplayer",
-      "category": "Accion",
-      "imgSource": "/img/A8.jpg",
       "publicado": true,
       "destacado": "no"
     }
