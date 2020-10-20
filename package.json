@@ -1,11 +1,19 @@
 {
   "name": "stinfinal",
   "version": "1.0.0",
-  "description": "",
+  "description": "\"#StinFinal\"",
   "main": "index.js",
   "scripts": {
     "server": "json-server --watch Games.json"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aperezalbert/StinFinal.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aperezalbert/StinFinal/issues"
+  },
+  "homepage": "https://github.com/aperezalbert/StinFinal#readme"
 }
