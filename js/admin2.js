@@ -9,8 +9,9 @@
       const namegame = document.getElementById('name').value;
       const stylegame = document.querySelector('input[name="style"]:checked').value;
       const categorygame = document.getElementById('category').value;
+      const imagegame = document.getElementById('imagen').value;
       const publishedgame= document.querySelector('input[name="published"]:checked').value =='true'
-      const data = { name: namegame, style: stylegame, category: categorygame,publicado:publishedgame,destacado:'no'};
+      const data = { name: namegame, style: stylegame, category: categorygame,imgSource:imagegame,publicado:publishedgame,destacado:'no'};
       postNewTodo(data);
       
     })
@@ -50,7 +51,7 @@
         <img src="${game.imgSource}" class="card-img" alt="...">
         </td>
         <td class="">
-        <button  type="button" class="btn btndelete deleteButton text-white" data-toggle="modal" data-target="#modalFormDelete"><span class="fas fa-trash-alt"></span>Borrar</button>
+        <button id= ${game.id} type="button" class="btn btndelete deleteButton text-white" data-toggle="modal" data-target="#modalForm1"><span class="fas fa-trash-alt"></span>Borrar</button>
         </td>
         <td class="">
         <button id= ${game.id} type="button" class="btn  btnedit editButton text-white" data-toggle="modal" data-target="#modalForm"><span class="fas fa-edit"></span>Editar</button>
@@ -64,7 +65,7 @@
     }
     
       
-       async function postNewTodo({ name,style,category,publicado,destacado}) {
+       async function postNewTodo({ name,style,category,imgSource,publicado,destacado}) {
        const url = 'http://localhost:3000/Games';
        const response = await fetch(url, {
         method: 'POST',
@@ -73,7 +74,7 @@
           'Content-Type': 'application/json'
         },
        
-        body: JSON.stringify({ name,style,category,publicado,destacado})
+        body: JSON.stringify({ name,style,category,imgSource,publicado,destacado})
       })
       const newData = await response.json();
       console.log(newData);
@@ -83,6 +84,7 @@
     getTodos().then(Games => buildTodo(Games));
 
     async function deleteVideoGame (id) {
+      console.log(id);
       const newURL = `http://localhost:3000/Games/${id}`;
       const response = await fetch(newURL, {
         method: 'DELETE'
@@ -98,12 +100,12 @@
       }
     })
 
-    function deleteForm() {
+    function deleteForm(game) {
       const form = document.createElement('form');
       form.id = 'deleForm'
       form.classList.add('deletForm')
       form.innerHTML = `
-      <div class="modal fade" id="modalFormDelete" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
+      <div class="modal fade" id="modalForm1" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
@@ -116,7 +118,7 @@
           <h4 id:"modaltextodelete"> ¿Esta Seguro de eliminar este juego?</h5>
           </div>
          <div class="modal-footer">
-         <button  class="btn btn-success aceptar putContent" >Si</button>
+         <button  class="btn btn-success aceptar putContent" id= ${game.id} >Si</button>
          <button  type="button" class="btn btn-success putContent" data-dismiss="modal">No</button>
          </div>
         </div>
@@ -130,6 +132,8 @@
     
     deleFormContainer.addEventListener(`click`, e => {
       if(e.target.classList.contains(`aceptar`)) {
+        const id = e.target.id;
+        
         deleteVideoGame(id);
       }
     })
